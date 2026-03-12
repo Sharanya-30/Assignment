@@ -1,0 +1,81 @@
+.cardtest.block > ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: stretch; /* equal heights for cards on a row */
+}
+ 
+/* card: keep vertical centering but control width for columns */
+.cardtest.block > ul >li {
+    box-sizing: border-box;
+    width: 100%; /* mobile: single column */
+    margin: 0;
+    padding: 25px 15px; /* slightly increased vertical padding for breathing room */
+    text-align: center;
+    position: relative; /* added for pseudo-element positioning */
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    overflow: visible;
+ 
+    /* align content consistently across cards */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 260px; /* ensures equal card height so headings/icons line up */
+}
+ 
+/* tablet: two columns */
+@media (min-width: 600px) {
+  .cardtest.block > ul > li {
+    width: calc(50% - 12px);
+  }
+}
+ 
+/* desktop: four columns */
+@media (min-width: 900px) {
+  .cardtest.block > ul > li {
+    width: calc(25% - 18px);
+  }
+}
+ 
+/* decorative line at the end of the box */
+.cardtest.block > ul >li::after {
+    content: "";
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px; /* slightly moved up to account for increased padding/min-height */
+    height: 4px;
+    background: transparent;
+    border-radius: 2px;
+    transition: background-color 180ms ease, transform 180ms ease;
+}
+ 
+/* hover state: red line and heading/link color */
+.cardtest.block > ul >li:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+ 
+.cardtest.block > ul >li:hover::after {
+    background: #e11; /* red line color */
+}
+ 
+/* make heading and any link inside it the same red on hover */
+.cardtest.block> ul >li h2 {
+    font-weight: 400;
+    transition: color 180ms ease;
+}
+.cardtest.block > ul >li:hover h2,
+.cardtest.block > ul >li:hover h2 a {
+    color: #e11;
+}
+.cardtest-card-body p{
+    font-style: italic;
+    font-weight: lighter;
+}
+
+ 
