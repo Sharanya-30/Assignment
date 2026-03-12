@@ -77,5 +77,20 @@
     font-style: italic;
     font-weight: lighter;
 }
+.cardtest.block >ul >li{
+    position: relative;
+    &:hover {
+     color: red;
+   }
+}
+.cardtest.block >ul >li ul{
+   position: absolute;
+   top: 0;
+   right: 0;
+   list-style: none;
+   font-size: 30px;
+   font-weight: bold;
+   font-style: italic;
+}
 
  
