@@ -590,3 +590,25 @@ header nav .nav-tools {
     border-radius: 8px;
   }
 }
+/* Red button style for Request to Quote */
+.section.nav-tools .default-content-wrapper a{
+  display: inline-block;
+  background: #E71F3A;      /* Bright red */
+  color: #FFFFFF;           /* White text */
+  padding: 12px 28px;       /* Button size */
+  border-radius: 999px;     /* Perfect pill shape */
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  transition: all .18s ease;
+}
+
+/* Hover effect */
+.section.nav-tools .default-content-wrapper a:hover{
+  background: #FF304A;      /* Lighter red on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.30);
+}
