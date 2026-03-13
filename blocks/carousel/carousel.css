@@ -154,3 +154,279 @@
 @media (min-width: 900px) {
   .carousel.block .carousel__body { margin-left: clamp(20px, 9vw, 140px); }
 }
+
+/* ===== Feature list styles inside the hero/carousel ===== */
+/* Container (from earlier) */
+/* ================================
+   BASE LAYOUT FOR CAROUSEL SLIDES
+   ================================ */
+
+.section.carousel-container {
+  position: relative;
+}
+
+.carousel.block {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.carousel__slide {
+  position: relative;
+}
+
+.carousel__media picture,
+.carousel__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Dark teal overlay to match the design */
+.carousel__slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(3, 32, 40, 0.88), rgba(3, 32, 40, 0.88));
+  pointer-events: none;
+}
+
+/* Content container centered vertically with generous left padding */
+.carousel__body {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: min(1100px, 90vw);
+  margin-left: clamp(24px, 8vw, 120px);
+  z-index: 2; /* above overlay */
+}
+
+/* ================================
+   TYPOGRAPHY
+   ================================ */
+
+:root {
+  --brand-red: #EB1B2B;
+  --brand-red-dark: #cf1725;
+  --ink: #ffffff;
+  --muted: rgba(255, 255, 255, 0.75);
+}
+
+.carousel__body h2#transportation-is-the-center-of-the-world,
+.carousel__body h2#taxi-brooklyn-disrupt-pinterest,
+.carousel__body h2#master-cleanse-poke-twee-actually-pbrb-meggings-jawn {
+  /* lead line: all caps, letter-spaced */
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 10px 0;
+}
+
+/* Main title (2nd h2 on first slide) */
+.carousel__body h2#transport--log {
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--ink);
+  margin: 0 0 14px 0;
+  /* Mimic “Transport & Logistics” — your text is “Transport & Log” */
+}
+
+/* Paragraph under title */
+.carousel__body > p {
+  font-size: clamp(14px, 1.4vw, 18px);
+  line-height: 1.6;
+  color: var(--muted);
+  max-width: 760px;
+  margin: 0 0 22px 0;
+}
+
+/* ================================
+   FEATURE PILLS (UL -> LI)
+   ================================ */
+
+.carousel__body ul {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+  margin: 8px 0 24px 0;
+  padding: 0;
+}
+
+/* Each pill */
+.carousel__body ul > li {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(0, 0, 0, 0.25); /* subtle glass */
+  backdrop-filter: blur(2px);
+  color: var(--ink);
+}
+
+/* Ensure labels inside pills are clean */
+.carousel__body ul > li h4,
+.carousel__body ul > li {
+  margin: 0;
+  font-size: clamp(14px, 1.3vw, 18px);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+/* Red outlined square */
+.carousel__body ul > li::before {
+  content: "";
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: 2px solid var(--brand-red);
+  display: inline-block;
+}
+
+/* White tick centered inside the red square */
+.carousel__body ul > li::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 4px;
+  left: 20px;              /* centers within the 22px square */
+  /* draw a check using borders */
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg);
+}
+
+/* Remove earlier line breaks nested in your second item */
+#warehouse-facilityknowmore br { display: none; }
+
+/* ================================
+   PRIMARY BUTTONS ROW
+   ================================ */
+
+/* We’ll repurpose the second slide’s “knowmore” link and any future CTA.
+   If you want explicit buttons, add a small wrapper after the UL. */
+.carousel__body .cta-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 8px 0 24px 0;
+}
+
+.carousel__body .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: clamp(14px, 1.3vw, 16px);
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+/* Red filled button (Know More / Our Mission) */
+.carousel__body .btn--primary {
+  background: var(--brand-red);
+  color: #fff;
+}
+.carousel__body .btn--primary:hover,
+.carousel__body .btn--primary:focus-visible {
+  background: var(--brand-red-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(235, 27, 43, 0.35);
+  outline: none;
+}
+
+/* If you keep your existing knowmore inside h4, style it like a button clone */
+#warehouse-facilityknowmore a {
+  display: inline-flex;
+  margin-left: 16px;
+  padding: 12px 18px;
+  border-radius: 10px;
+  background: var(--brand-red);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 14px;
+}
+#warehouse-facilityknowmore a:hover { background: var(--brand-red-dark); }
+
+/* ================================
+   SOCIAL ICONS (square red with white icons)
+   ================================ */
+
+.carousel__body .social-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.carousel__body .social {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--brand-red);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 18px; /* if using icon font */
+  transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+}
+.carousel__body .social:hover {
+  background: var(--brand-red-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(235, 27, 43, 0.35);
+}
+
+/* ================================
+   NAV ARROWS AND SLIDE INDEX
+   ================================ */
+
+.carousel__nav .carousel__btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 46px;
+  height: 46px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--brand-red);
+  font-size: 34px;
+  line-height: 1;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: background 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+}
+.carousel__nav .carousel__btn:hover {
+  background: rgba(0, 0, 0, 0.55);
+  transform: translateY(calc(-50% - 1px));
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.carousel__nav .prev { left: clamp(10px, 3vw, 24px); }
+.carousel__nav .next { right: clamp(10px, 3vw, 24px); }
+
+.carousel__index {
+  position: absolute;
+  right: clamp(10px, 3vw, 24px);
+  bottom: clamp(10px, 3vw, 24px);
+  z-index: 3;
+}

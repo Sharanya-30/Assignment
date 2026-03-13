@@ -270,3 +270,323 @@ header nav .nav-sections ul > li > ul > li {
 header nav .nav-tools {
   grid-area: tools;
 }
+
+/* ========== HEADER LAYOUT ========== */
+.header .nav-wrapper {
+  /* Make the entire header a flex row */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 12px 24px;
+}
+
+/* Brand (logo) left, keep image natural */
+.header .nav-brand .default-content-wrapper picture,
+.header .nav-brand .default-content-wrapper img {
+  display: block;
+  height: 56px;            /* adjust as needed */
+  width: auto;
+}
+
+/* Middle section holds the nav, we’ll push it to the right via flex */
+#nav {
+  flex: 1;                 /* let nav area expand */
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Place sections (menu) and tools (search/cta) in a row, right aligned */
+.header .nav-sections,
+.header .nav-tools {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.header .nav-sections {
+  margin-left: auto;       /* pushes menu to the right */
+}
+
+/* ========== BASE MENU STYLES ========== */
+.header .nav-sections .default-content-wrapper > ul {
+  display: flex;
+  align-items: center;
+  gap: 36px;               /* space between top-level items */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header .nav-sections .default-content-wrapper > ul > li {
+  position: relative;      /* required for dropdown positioning */
+  cursor: pointer;
+}
+
+.header .nav-sections p,
+.header .nav-sections a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #0b0d0f;          /* near-black as in reference */
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1;
+}
+
+
+/* ========== HOVER/ACTIVE EFFECTS ========== */
+:root {
+  --brand-red: #EB1B2B;    /* adjust to match your design */
+}
+
+.header .nav-sections p:hover,
+.header .nav-sections a:hover {
+  color: var(--brand-red);
+}
+
+/* Subtle underline indicator on hover (like the reference feel) */
+.header .nav-sections .default-content-wrapper > ul > li > p {
+  position: relative;
+  padding-bottom: 6px;  /* room for underline */
+}
+
+.header .nav-sections .default-content-wrapper > ul > li > p::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: transparent;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 200ms ease, background 200ms ease;
+}
+
+.header .nav-sections .default-content-wrapper > ul > li:hover > p::before {
+  background: var(--brand-red);
+  transform: scaleX(1);
+}
+
+/* Keep caret red on hover for dropdown items */
+.header .nav-sections .default-content-wrapper > ul > li.nav-drop:hover > p::after {
+  color: var(--brand-red);
+}
+
+/* ========== DROPDOWN MENUS ========== */
+.header .nav-sections .default-content-wrapper > ul > li > ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background: #ffffff;
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+  padding: 10px 0;
+  margin: 10px 0 0;
+  list-style: none;
+  display: none; /* hidden by default */
+  z-index: 20;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+}
+
+.header .nav-sections .default-content-wrapper > ul > li:hover > ul,
+.header .nav-sections .default-content-wrapper > ul > li:focus-within > ul {
+  display: block; /* simple hover/focus open */
+}
+
+.header .nav-sections .default-content-wrapper > ul > li > ul > li {
+  padding: 0;
+}
+
+/* Links inside dropdown */
+.header .nav-sections .default-content-wrapper > ul > li > ul a,
+.header .nav-sections .default-content-wrapper > ul > li > ul p {
+  display: block;
+  padding: 10px 16px;
+  color: #0b0d0f;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header .nav-sections .default-content-wrapper > ul > li > ul a:hover,
+.header .nav-sections .default-content-wrapper > ul > li > ul p:hover {
+  background: #fff3f4;     /* faint red bg hover */
+  color: var(--brand-red);
+}
+
+/* Handle nested dropdowns (like Faq's ▸ Portfolio) */
+.header .nav-sections .default-content-wrapper > ul > li > ul > li > ul {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  margin-left: 8px;
+  display: none;
+}
+
+.header .nav-sections .default-content-wrapper > ul > li > ul > li:hover > ul {
+  display: block;
+}
+
+/* ========== SEARCH + CTA AREA ========== */
+.header .nav-tools .default-content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Example Search icon alignment */
+.header .nav-tools .icon-search img {
+  display: block;
+}
+
+/* CTA button (matches screenshot) */
+.header .nav-tools .cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--brand-red);
+  color: #fff;
+  font-weight: 800;
+  font-size: 18px;
+  padding: 14px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.header .nav-tools .cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(235, 27, 43, 0.25);
+}
+
+/* ========== MOBILE BEHAVIOR (basic) ========== */
+@media (max-width: 900px) {
+  .header .nav-wrapper {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  #nav {
+    gap: 12px;
+  }
+  .header .nav-sections .default-content-wrapper > ul {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .header .nav-tools .cta {
+    padding: 12px 18px;
+    font-size: 16px;
+  }
+}
+
+.header .nav-tools .cta {
+  background: #EB1B2B;
+  color: #fff;
+  font-weight: 800;
+  font-size: 18px;
+  padding: 14px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#nav {
+  flex: 1;                 /* let nav area stretch */
+  display: flex;
+  align-items: center;
+}
+
+.header .nav-sections {
+  margin-left: auto;       /* push menu to the right */
+}
+
+/* Variables */
+:root {
+  --brand-red: #EB1B2B;
+  --brand-red-darker: #cf1725;
+  --text-dark: #0b0d0f;
+}
+
+/* Ensure top-level nav is a row */
+.header .nav-sections .default-content-wrapper > ul {
+  display: flex;
+  align-items: center;
+  gap: 36px;                  /* spacing between regular items */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* CTA list item: give a bit more separation from the text links */
+.header .nav-sections .default-content-wrapper > ul > li.nav-cta {
+  margin-left: 12px;          /* small gap before button */
+}
+
+/* The actual CTA button */
+.header .nav-sections .btn-quote {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border-radius: 10px;
+  background: var(--brand-red);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 18px;
+  line-height: 1;
+  white-space: nowrap;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+}
+
+/* Hover / focus styles for nice feedback & accessibility */
+.header .nav-sections .btn-quote:hover,
+.header .nav-sections .btn-quote:focus-visible {
+  background: var(--brand-red-darker);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(235, 27, 43, 0.25);
+  outline: none;
+}
+
+/* Keyboard focus ring fallback */
+.header .nav-sections .btn-quote:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.9),
+    0 0 0 6px rgba(235, 27, 43, 0.55);
+}
+
+/* Keep the regular nav items looking like text links */
+.header .nav-sections p,
+.header .nav-sections a:not(.btn-quote) {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* Optional: red on hover for text links */
+.header .nav-sections p:hover,
+.header .nav-sections a:not(.btn-quote):hover {
+  color: var(--brand-red);
+}
+
+/* Responsive adjustment */
+@media (max-width: 900px) {
+  .header .nav-sections .default-content-wrapper > ul {
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .header .nav-sections .btn-quote {
+    padding: 12px 18px;
+    font-size: 16px;
+    border-radius: 8px;
+  }
+}

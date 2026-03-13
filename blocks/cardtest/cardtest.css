@@ -92,5 +92,10 @@
    font-weight: bold;
    font-style: italic;
 }
-
+.cardtest-card-body
+p{
+  &:hover{
+    background-color: none;
+  }
+}
  
