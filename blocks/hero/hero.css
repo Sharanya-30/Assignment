@@ -210,3 +210,7 @@
       rgba(9,25,53,0.18) 100%
     ) !important;
 }
+
+#services-provide{
+  color: red;
+}
